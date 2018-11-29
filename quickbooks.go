@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/jinmatt/go-quickbooks.v2/sdk"
-	"github.com/jinmatt/go-quickbooks.v2/sdk/consts"
+	"github.com/omniboost/go-quickbooks/sdk"
+	"github.com/omniboost/go-quickbooks/sdk/consts"
 )
 
 // Quickbooks client type
@@ -14,20 +14,20 @@ type Quickbooks struct {
 	RealmID     string
 	AccessToken string
 	baseURL     string
+	http        *http.Client
 }
 
 // NewClient creates a new client to work with Quickbooks
-func NewClient(realmID string, accessToken string, isSandbox bool) *Quickbooks {
-	q := Quickbooks{}
-	q.RealmID = realmID
-	q.AccessToken = accessToken
-
-	if isSandbox {
-		q.baseURL = sdk.SandboxURL
-	} else {
-		q.baseURL = sdk.ProductionURL
+func NewClient(httpClient *http.Client, realmID string) *Quickbooks {
+	if httpClient == nil {
+		httpClient = http.DefaultClient
 	}
 
+	q := Quickbooks{}
+	q.http = httpClient
+	q.RealmID = realmID
+
+	q.SetBaseURL(sdk.ProductionURL)
 	return &q
 }
 
@@ -35,7 +35,6 @@ func NewClient(realmID string, accessToken string, isSandbox bool) *Quickbooks {
 // endpoint should start with a leading '/'
 func (q *Quickbooks) makeGetRequest(endpoint string) (*http.Response, error) {
 	urlStr := q.baseURL + endpoint
-	httpClient := &http.Client{}
 
 	request, err := http.NewRequest("GET", urlStr, nil)
 	if err != nil {
@@ -46,7 +45,7 @@ func (q *Quickbooks) makeGetRequest(endpoint string) (*http.Response, error) {
 	request.Header.Set("accept", "application/json")
 	request.Header.Set("Authorization", "Bearer "+q.AccessToken)
 
-	response, err := httpClient.Do(request)
+	response, err := q.http.Do(request)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +61,6 @@ func (q *Quickbooks) makeGetRequest(endpoint string) (*http.Response, error) {
 // endpoint should start with a leading '/'
 func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.Response, error) {
 	urlStr := q.baseURL + endpoint
-	httpClient := &http.Client{}
 
 	b, err := json.Marshal(body)
 	if err != nil {
@@ -79,7 +77,7 @@ func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.R
 	request.Header.Set("Content-Type", "application/json")
 	request.Header.Set("Authorization", "Bearer "+q.AccessToken)
 
-	response, err := httpClient.Do(request)
+	response, err := q.http.Do(request)
 	if err != nil {
 		return nil, err
 	}
@@ -91,9 +89,17 @@ func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.R
 	return response, nil
 }
 
+func (q *Quickbooks) SetBaseURL(URL string) {
+	q.baseURL = URL
+}
+
 func handleError(response *http.Response) error {
 	switch response.StatusCode {
 	case 400:
+		// b, errz := ioutil.ReadAll(response.Body)
+		// log.Println(string(b))
+		// log.Println(errz)
+		// os.Exit(2)
 		qbError := ErrorObject{}
 		err := json.NewDecoder(response.Body).Decode(&qbError)
 		if err != nil {

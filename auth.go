@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/jinmatt/go-quickbooks.v2/sdk/consts"
+	"github.com/omniboost/go-quickbooks/sdk/consts"
 )
 
 // BearerToken token response type from quickbooks

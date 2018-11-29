@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	randomdata "github.com/Pallinder/go-randomdata"
-	"github.com/jinmatt/go-quickbooks.v2"
-	"github.com/jinmatt/go-quickbooks.v2/sdk/consts"
 	seed "github.com/jinmatt/go-seed-rand"
+	"github.com/omniboost/go-quickbooks"
+	"github.com/omniboost/go-quickbooks/sdk/consts"
 	"github.com/tylerb/is"
 )
 

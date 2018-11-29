@@ -20,8 +20,9 @@ type Account struct {
 	Classification                string       `json:"Classification,omitempty"`
 	AccountType                   string       `json:"AccountType"`
 	AccountSubType                string       `json:"AccountSubType,omitempty"`
-	CurrentBalance                int          `json:"CurrentBalance,omitempty"`
-	CurrentBalanceWithSubAccounts int          `json:"CurrentBalanceWithSubAccounts,omitempty"`
+	AcctNum                       string       `json:"AcctNum,omitempty"`
+	CurrentBalance                float64      `json:"CurrentBalance,omitempty"`
+	CurrentBalanceWithSubAccounts float64      `json:"CurrentBalanceWithSubAccounts,omitempty"`
 	CurrencyRef                   *CurrencyRef `json:"CurrencyRef,omitempty"`
 	Domain                        string       `json:"domain,omitempty"`
 	Sparse                        bool         `json:"sparse,omitempty"`

@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	quickbooks "github.com/jinmatt/go-quickbooks.v2"
+	quickbooks "github.com/omniboost/go-quickbooks"
 	"github.com/tylerb/is"
 )
 
