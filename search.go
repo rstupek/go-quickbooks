@@ -122,3 +122,22 @@ func (qr QueryResponse) ToPayment() ([]Payment, error) {
 
 	return payments, nil
 }
+
+// ToTaxCode converts a search QueryRespose to TaxCode array type
+func (qr QueryResponse) ToTaxCode() ([]TaxCode, error) {
+	queryResponse := qr["QueryResponse"]
+	document := queryResponse.(map[string]interface{})
+
+	b, err := json.Marshal(document["TaxCode"])
+	if err != nil {
+		return nil, err
+	}
+
+	payments := []TaxCode{}
+	err = json.Unmarshal(b, &payments)
+	if err != nil {
+		return nil, err
+	}
+
+	return payments, nil
+}
