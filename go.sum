@@ -1,0 +1,8 @@
+github.com/jinmatt/go-quickbooks.v2 v0.0.0-20170731190806-fa331c99d581 h1:AzktK7fJJVQvZNlc4KZxSOCmbKMHr3EVJ8JAo/4SEjM=
+github.com/jinmatt/go-quickbooks.v2 v0.0.0-20170731190806-fa331c99d581/go.mod h1:MJmYFtBcGJYJd4eMmTV0vN33tnCfh1wyjnn6wAJJi+U=
+github.com/tylerb/is v2.1.2+incompatible h1:Qs/nJHvlnWK8cnqLCNdOCh0fep0unhqi2UtPnYKCq2w=
+github.com/tylerb/is v2.1.2+incompatible/go.mod h1:3Bw2NWEEe8Kx7/etYqgm9ug53iNDgabnloch75jjOSc=
+golang.org/x/net v0.0.0-20181114220301-adae6a3d119a h1:gOpx8G595UYyvj8UK4+OFyY4rx037g3fmfhe5SasG3U=
+golang.org/x/net v0.0.0-20181114220301-adae6a3d119a/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+golang.org/x/oauth2 v0.0.0-20181120190819-8f65e3013eba h1:YDkOrzGLLYybtuP6ZgebnO4OWYEYVMFSniazXsxrFN8=
+golang.org/x/oauth2 v0.0.0-20181120190819-8f65e3013eba/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=
