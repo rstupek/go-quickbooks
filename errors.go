@@ -5,7 +5,9 @@ import "fmt"
 // ErrorObject quickbooks error object
 type ErrorObject struct {
 	Fault fault `json:"Fault"`
-	Time  int   `json:"time"` // @TODO: change this to a Time/Timestamp type
+	// @TODO: change this to a Time/Timestamp type
+	// can be 13234232 or "2018-11-29T02:53:10.369-08:00"
+	Time string `json:"time"`
 }
 
 type fault struct {
