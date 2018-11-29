@@ -3,7 +3,9 @@ package quickbooks
 import (
 	"bytes"
 	"encoding/json"
+	"log"
 	"net/http"
+	"net/http/httputil"
 
 	"github.com/omniboost/go-quickbooks/sdk"
 	"github.com/omniboost/go-quickbooks/sdk/consts"
@@ -14,7 +16,11 @@ type Quickbooks struct {
 	RealmID     string
 	AccessToken string
 	baseURL     string
-	http        *http.Client
+
+	// http client to use
+	http *http.Client
+	// Debugging flag
+	debug bool
 }
 
 // NewClient creates a new client to work with Quickbooks
@@ -45,7 +51,16 @@ func (q *Quickbooks) makeGetRequest(endpoint string) (*http.Response, error) {
 	request.Header.Set("accept", "application/json")
 	request.Header.Set("Authorization", "Bearer "+q.AccessToken)
 
+	if q.debug == true {
+		dump, _ := httputil.DumpRequestOut(request, true)
+		log.Println(string(dump))
+	}
+
 	response, err := q.http.Do(request)
+	if q.debug == true {
+		dump, _ := httputil.DumpResponse(response, true)
+		log.Println(string(dump))
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +92,16 @@ func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.R
 	request.Header.Set("Content-Type", "application/json")
 	request.Header.Set("Authorization", "Bearer "+q.AccessToken)
 
+	if q.debug == true {
+		dump, _ := httputil.DumpRequestOut(request, true)
+		log.Println(string(dump))
+	}
+
 	response, err := q.http.Do(request)
+	if q.debug == true && response != nil {
+		dump, _ := httputil.DumpResponse(response, true)
+		log.Println(string(dump))
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -91,6 +115,10 @@ func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.R
 
 func (q *Quickbooks) SetBaseURL(URL string) {
 	q.baseURL = URL
+}
+
+func (q *Quickbooks) SetDebug(debug bool) {
+	q.debug = debug
 }
 
 func handleError(response *http.Response) error {
