@@ -40,6 +40,7 @@ type Customer struct {
 	PrimaryEmailAddr *struct {
 		Address string `json:"Address"`
 	} `json:"PrimaryEmailAddr,omitempty"`
+	ResaleNum string `json:"ResaleNum,omitempty"`
 
 	MetaData *struct {
 		CreateTime      string `json:"CreateTime"`
