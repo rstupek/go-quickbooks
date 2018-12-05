@@ -83,7 +83,7 @@ type TaxCodeRef struct {
 // SalesItemLineDetail quickbooks invoice sales line item details object
 type SalesItemLineDetail struct {
 	ItemRef    *ItemRef    `json:"ItemRef"`
-	UnitPrice  int         `json:"UnitPrice"`
+	UnitPrice  float64     `json:"UnitPrice"`
 	Qty        int         `json:"Qty"`
 	TaxCodeRef *TaxCodeRef `json:"TaxCodeRef,omitempty"`
 }

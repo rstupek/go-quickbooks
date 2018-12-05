@@ -20,7 +20,7 @@ type Item struct {
 	Active             bool        `json:"Active,omitempty"`
 	FullyQualifiedName string      `json:"FullyQualifiedName,omitempty"`
 	Taxable            bool        `json:"Taxable,omitempty"`
-	UnitPrice          int         `json:"UnitPrice,omitempty"`
+	UnitPrice          float64     `json:"UnitPrice,omitempty"`
 	IncomeAccountRef   *AccountRef `json:"IncomeAccountRef"`
 	PurchaseDesc       string      `json:"PurchaseDesc,omitempty"`
 	PurchaseCost       int         `json:"PurchaseCost,omitempty"`
