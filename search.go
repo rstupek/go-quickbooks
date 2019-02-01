@@ -133,11 +133,11 @@ func (qr QueryResponse) ToTaxCode() ([]TaxCode, error) {
 		return nil, err
 	}
 
-	payments := []TaxCode{}
-	err = json.Unmarshal(b, &payments)
+	taxCodes := []TaxCode{}
+	err = json.Unmarshal(b, &taxCodes)
 	if err != nil {
 		return nil, err
 	}
 
-	return payments, nil
+	return taxCodes, nil
 }
