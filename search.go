@@ -141,3 +141,22 @@ func (qr QueryResponse) ToTaxCode() ([]TaxCode, error) {
 
 	return taxCodes, nil
 }
+
+// ToClass converts a search QueryRespose to Class array type
+func (qr QueryResponse) ToClass() ([]Class, error) {
+	queryResponse := qr["QueryResponse"]
+	document := queryResponse.(map[string]interface{})
+
+	b, err := json.Marshal(document["Class"])
+	if err != nil {
+		return nil, err
+	}
+
+	classes := []Class{}
+	err = json.Unmarshal(b, &classes)
+	if err != nil {
+		return nil, err
+	}
+
+	return classes, nil
+}

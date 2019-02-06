@@ -41,17 +41,23 @@ type JournalEntryLineDetail struct {
 	TaxCodeRef      *TaxCodeRef     `json:"TaxCodeRef,omitempty"`
 	TaxApplicableOn *string         `json:"TaxApplicableOn,omitempty"`
 	TaxAmount       *float64        `json:"TaxAmount,omitempty"`
+	ClassRef        *ClassRef       `json:"ClassRef,omitempty"`
 }
 
 // Metadata - info about when the journal entry was created/updated.
 type MetaData struct {
-	CreateTime      string `json:"CreateTime, omitempty"`
-	LastUpdatedTime string `json:"LastUpdatedTime, omitempty"`
+	CreateTime      string `json:"CreateTime,omitempty"`
+	LastUpdatedTime string `json:"LastUpdatedTime,omitempty"`
 }
 
 type JournalEntryRef struct {
-	Value string `json:"value, omitempty"`
-	Name  string `json:"name, omitempty"`
+	Value string `json:"value,omitempty"`
+	Name  string `json:"name,omitempty"`
+}
+
+type ClassRef struct {
+	Value string `json:"value,omitempty"`
+	Name  string `json:"name,omitempty"`
 }
 
 type TxnTaxDetail struct {
