@@ -42,6 +42,7 @@ type JournalEntryLineDetail struct {
 	TaxApplicableOn *string         `json:"TaxApplicableOn,omitempty"`
 	TaxAmount       *float64        `json:"TaxAmount,omitempty"`
 	ClassRef        *ClassRef       `json:"ClassRef,omitempty"`
+	Entity          *Entity         `json:"Entity,omitempty"`
 }
 
 // Metadata - info about when the journal entry was created/updated.
@@ -58,6 +59,16 @@ type JournalEntryRef struct {
 type ClassRef struct {
 	Value string `json:"value,omitempty"`
 	Name  string `json:"name,omitempty"`
+}
+
+type Entity struct {
+	Type      string    `json:"Type"`
+	EntityRef EntityRef `json:"EntityRef"`
+}
+
+type EntityRef struct {
+	Name  string `json:"name"`
+	Value string `json:"value"`
 }
 
 type TxnTaxDetail struct {
