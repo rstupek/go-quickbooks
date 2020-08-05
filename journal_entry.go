@@ -13,16 +13,15 @@ type JournalEntryObject struct {
 
 // Journal Entry quickbooks Journal Entry type
 type JournalEntry struct {
-	ID             string         `json:"Id,omitempty"`
-	Adjustment     bool           `json:"Adjustment,omitempty"`
-	Domain         string         `json:"domain,omitempty"`
-	Sparse         bool           `json:"sparse,omitempty"`
-	SyncToken      string         `json:"SyncToken,omitempty"`
-	TxnDate        string         `json:"TxnDate,omitempty"`
-	JournalCodeRef JournalCodeRef `json:"JournalCodeRef,omitempty"`
-	Line           []Line         `json:"Line"`
-	TxnTaxDetail   *TxnTaxDetail  `json:"TxnTaxDetail,omitempty"`
-	MetaData       *MetaData      `json:"MetaData,omitempty"`
+	ID           string        `json:"Id,omitempty"`
+	Adjustment   bool          `json:"Adjustment,omitempty"`
+	Domain       string        `json:"domain,omitempty"`
+	Sparse       bool          `json:"sparse,omitempty"`
+	SyncToken    string        `json:"SyncToken,omitempty"`
+	TxnDate      string        `json:"TxnDate,omitempty"`
+	Line         []Line        `json:"Line"`
+	TxnTaxDetail *TxnTaxDetail `json:"TxnTaxDetail,omitempty"`
+	MetaData     *MetaData     `json:"MetaData,omitempty"`
 }
 
 // Line type - part of Journal Entry
@@ -44,6 +43,7 @@ type JournalEntryLineDetail struct {
 	TaxAmount       *float64        `json:"TaxAmount,omitempty"`
 	ClassRef        *ClassRef       `json:"ClassRef,omitempty"`
 	Entity          *Entity         `json:"Entity,omitempty"`
+	JournalCodeRef  JournalCodeRef  `json:"JournalCodeRef,omitempty"`
 }
 
 // Metadata - info about when the journal entry was created/updated.
