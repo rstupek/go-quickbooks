@@ -160,3 +160,22 @@ func (qr QueryResponse) ToClass() ([]Class, error) {
 
 	return classes, nil
 }
+
+// ToJournalCode converts a search QueryRespose to JournalCode array type
+func (qr QueryResponse) ToJournalCode() ([]JournalCode, error) {
+	queryResponse := qr["QueryResponse"]
+	document := queryResponse.(map[string]interface{})
+
+	b, err := json.Marshal(document["JournalCode"])
+	if err != nil {
+		return nil, err
+	}
+
+	journalCodes := []JournalCode{}
+	err = json.Unmarshal(b, &journalCodes)
+	if err != nil {
+		return nil, err
+	}
+
+	return journalCodes, nil
+}
