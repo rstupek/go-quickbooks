@@ -18,6 +18,7 @@ type JournalEntry struct {
 	Domain       string        `json:"domain,omitempty"`
 	Sparse       bool          `json:"sparse,omitempty"`
 	SyncToken    string        `json:"SyncToken,omitempty"`
+	DocNumber    string        `json:"DocNumber,omitempty"`
 	TxnDate      string        `json:"TxnDate,omitempty"`
 	Line         []Line        `json:"Line"`
 	TxnTaxDetail *TxnTaxDetail `json:"TxnTaxDetail,omitempty"`
