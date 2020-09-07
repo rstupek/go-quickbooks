@@ -179,3 +179,22 @@ func (qr QueryResponse) ToJournalCode() ([]JournalCode, error) {
 
 	return journalCodes, nil
 }
+
+// ToCompanyInfo converts a search QueryRespose to JournalCode array type
+func (qr QueryResponse) ToCompanyInfo() ([]CompanyInfo, error) {
+	queryResponse := qr["QueryResponse"]
+	document := queryResponse.(map[string]interface{})
+
+	b, err := json.Marshal(document["CompanyInfo"])
+	if err != nil {
+		return nil, err
+	}
+
+	companyInfos := []CompanyInfo{}
+	err = json.Unmarshal(b, &companyInfos)
+	if err != nil {
+		return nil, err
+	}
+
+	return companyInfos, nil
+}
