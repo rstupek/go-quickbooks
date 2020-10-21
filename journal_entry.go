@@ -79,7 +79,8 @@ type EntityRef struct {
 }
 
 type TxnTaxDetail struct {
-	TaxLine []TaxLine `json:"TaxLine,omitempty"`
+	TotalTax *float64  `json:"TotalTax,omitempty"`
+	TaxLine  []TaxLine `json:"TaxLine,omitempty"`
 }
 
 // CreateJE creates a journal entry on quickbooks
