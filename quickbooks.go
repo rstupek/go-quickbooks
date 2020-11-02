@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
+	"net/url"
+	"strconv"
 
 	"github.com/omniboost/go-quickbooks/sdk"
 	"github.com/omniboost/go-quickbooks/sdk/consts"
@@ -13,9 +15,10 @@ import (
 
 // Quickbooks client type
 type Quickbooks struct {
-	RealmID     string
-	AccessToken string
-	baseURL     string
+	RealmID      string
+	AccessToken  string
+	baseURL      string
+	minorVersion int
 
 	// http client to use
 	http *http.Client
@@ -41,6 +44,21 @@ func NewClient(httpClient *http.Client, realmID string) *Quickbooks {
 // endpoint should start with a leading '/'
 func (q *Quickbooks) makeGetRequest(endpoint string) (*http.Response, error) {
 	urlStr := q.baseURL + endpoint
+
+	if q.MinorVersion() != 0 {
+		u, err := url.Parse(urlStr)
+		if err != nil {
+			return nil, err
+		}
+
+		v, err := url.ParseQuery(u.RawQuery)
+		if err != nil {
+			return nil, err
+		}
+		v.Add("minorversion", strconv.Itoa(q.MinorVersion()))
+		u.RawQuery = v.Encode()
+		urlStr = u.String()
+	}
 
 	request, err := http.NewRequest("GET", urlStr, nil)
 	if err != nil {
@@ -76,6 +94,21 @@ func (q *Quickbooks) makeGetRequest(endpoint string) (*http.Response, error) {
 // endpoint should start with a leading '/'
 func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.Response, error) {
 	urlStr := q.baseURL + endpoint
+
+	if q.MinorVersion() != 0 {
+		u, err := url.Parse(urlStr)
+		if err != nil {
+			return nil, err
+		}
+
+		v, err := url.ParseQuery(u.RawQuery)
+		if err != nil {
+			return nil, err
+		}
+		v.Add("minorversion", strconv.Itoa(q.MinorVersion()))
+		u.RawQuery = v.Encode()
+		urlStr = u.String()
+	}
 
 	b, err := json.Marshal(body)
 	if err != nil {
@@ -119,6 +152,14 @@ func (q *Quickbooks) SetBaseURL(URL string) {
 
 func (q *Quickbooks) SetDebug(debug bool) {
 	q.debug = debug
+}
+
+func (q *Quickbooks) SetMinorVersion(minorVersion int) {
+	q.minorVersion = minorVersion
+}
+
+func (q *Quickbooks) MinorVersion() int {
+	return q.minorVersion
 }
 
 func handleError(response *http.Response) error {
