@@ -94,8 +94,8 @@ type TaxLine struct {
 	DetailType    string  `json:"DetailType,omitempty"`
 	TaxLineDetail *struct {
 		TaxRateRef       *TaxCodeRef `json:"TaxRateRef,omitempty"`
-		PercentBased     bool        `json:"PercentBased"`
-		TaxPercent       int         `json:"TaxPercent"`
+		PercentBased     bool        `json:"PercentBased,omitempty"`
+		TaxPercent       float64        `json:"TaxPercent,omitempty"`
 		NetAmountTaxable float64     `json:"NetAmountTaxable"`
 	} `json:"TaxLineDetail,omitempty"`
 }
