@@ -24,7 +24,8 @@ type faultError struct {
 
 // Error() ErrorObject error interface method
 func (e ErrorObject) Error() string {
-	errStr := fmt.Sprintf("Type: %s Code: %s Message: %s", e.Fault.Type, e.Fault.Error[0].Code, e.Fault.Error[0].Message)
+	// errStr := fmt.Sprintf("Type: %s Code: %s Message: %s", e.Fault.Type, e.Fault.Error[0].Code, e.Fault.Error[0].Message)
+	errStr := fmt.Sprintf("Type: %s Code: %s Detail: %s", e.Fault.Type, e.Fault.Error[0].Code, e.Fault.Error[0].Detail)
 	return errStr
 }
 
