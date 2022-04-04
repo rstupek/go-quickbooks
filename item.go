@@ -23,7 +23,7 @@ type Item struct {
 	UnitPrice          float64     `json:"UnitPrice,omitempty"`
 	IncomeAccountRef   *AccountRef `json:"IncomeAccountRef"`
 	PurchaseDesc       string      `json:"PurchaseDesc,omitempty"`
-	PurchaseCost       int         `json:"PurchaseCost,omitempty"`
+	PurchaseCost       float64     `json:"PurchaseCost,omitempty"`
 	ExpenseAccountRef  *AccountRef `json:"ExpenseAccountRef,omitempty"`
 	AssetAccountRef    *AccountRef `json:"AssetAccountRef,omitempty"`
 	TrackQtyOnHand     bool        `json:"TrackQtyOnHand,omitempty"`
