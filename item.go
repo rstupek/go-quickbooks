@@ -27,7 +27,7 @@ type Item struct {
 	ExpenseAccountRef  *AccountRef `json:"ExpenseAccountRef,omitempty"`
 	AssetAccountRef    *AccountRef `json:"AssetAccountRef,omitempty"`
 	TrackQtyOnHand     bool        `json:"TrackQtyOnHand,omitempty"`
-	QtyOnHand          int         `json:"QtyOnHand,omitempty"`
+	QtyOnHand          float64     `json:"QtyOnHand,omitempty"`
 	InvStartDate       string      `json:"InvStartDate,omitempty"`
 	Domain             string      `json:"domain,omitempty"`
 	Sparse             bool        `json:"sparse,omitempty"`
