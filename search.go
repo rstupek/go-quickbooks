@@ -198,3 +198,22 @@ func (qr QueryResponse) ToCompanyInfo() ([]CompanyInfo, error) {
 
 	return companyInfos, nil
 }
+
+// ToCreditMemo converts a search QueryRespose to CreditMemo array type
+func (qr QueryResponse) ToCreditMemo() ([]CreditMemo, error) {
+	queryResponse := qr["QueryResponse"]
+	document := queryResponse.(map[string]interface{})
+
+	b, err := json.Marshal(document["CreditMemo"])
+	if err != nil {
+		return nil, err
+	}
+
+	invoices := []CreditMemo{}
+	err = json.Unmarshal(b, &invoices)
+	if err != nil {
+		return nil, err
+	}
+
+	return invoices, nil
+}
