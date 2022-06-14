@@ -28,6 +28,7 @@ type Payment struct {
 		CreateTime      string `json:"CreateTime"`
 		LastUpdatedTime string `json:"LastUpdatedTime"`
 	} `json:"MetaData,omitempty"`
+	PaymentRefNum string `json:"PaymentRefNum,omitempty"`
 }
 
 // PaymentLine quickbooks payment line object
