@@ -37,6 +37,9 @@ type Customer struct {
 	PrimaryPhone *struct {
 		FreeFormNumber string `json:"FreeFormNumber"`
 	} `json:"PrimaryPhone,omitempty"`
+	AlternatePhone *struct {
+		FreeFormNumber string `json:"FreeFormNumber"`
+	} `json:"AlternatePhone,omitempty"`
 	PrimaryEmailAddr *struct {
 		Address string `json:"Address"`
 	} `json:"PrimaryEmailAddr,omitempty"`
