@@ -108,7 +108,9 @@ func (q *Quickbooks) CreateInvoice(invoice Invoice) (*InvoiceObject, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
 
 	newInvoice := InvoiceObject{}
 	err = json.NewDecoder(res.Body).Decode(&newInvoice)

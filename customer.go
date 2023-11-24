@@ -78,7 +78,9 @@ func (q *Quickbooks) CreateCustomer(customer Customer) (*CustomerObject, error) 
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
 
 	newCustomer := CustomerObject{}
 	err = json.NewDecoder(res.Body).Decode(&newCustomer)

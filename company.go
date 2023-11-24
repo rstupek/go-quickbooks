@@ -72,7 +72,9 @@ func (q *Quickbooks) GetCompanyInfo() (*Company, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
 
 	company := Company{}
 	err = json.NewDecoder(res.Body).Decode(&company)

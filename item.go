@@ -52,7 +52,9 @@ func (q *Quickbooks) CreateItem(item Item) (*ItemObject, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
 
 	newItem := ItemObject{}
 	err = json.NewDecoder(res.Body).Decode(&newItem)

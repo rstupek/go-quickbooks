@@ -70,7 +70,9 @@ func (q *Quickbooks) CreateCreditMemo(creditmemo CreditMemo) (*CreditMemoObject,
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
 
 	newCreditMemo := CreditMemoObject{}
 	err = json.NewDecoder(res.Body).Decode(&newCreditMemo)

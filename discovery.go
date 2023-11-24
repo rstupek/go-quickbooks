@@ -37,7 +37,9 @@ func NewDiscovery(isSandbox bool) (*Discovery, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
 
 	discovery := Discovery{}
 	err = json.NewDecoder(res.Body).Decode(&discovery)

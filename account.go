@@ -54,7 +54,9 @@ func (q *Quickbooks) CreateAccount(account Account) (*AccountObject, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
 
 	newAccount := AccountObject{}
 	err = json.NewDecoder(res.Body).Decode(&newAccount)
